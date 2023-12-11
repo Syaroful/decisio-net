@@ -1,4 +1,5 @@
-var pageName = window.location.pathname.split("/").pop().split(".")[0];
+var pageName = page;
+var sidenav_target = to_build + "pages/" + pageName + ".html";
 
 var fixedPlugin = document.querySelector("[fixed-plugin]");
 var fixedPluginButton = document.querySelector("[fixed-plugin-button]");
@@ -13,21 +14,20 @@ var buttonNavbarFixed = document.querySelector("[navbarFixed]");
 var sidenav = document.querySelector("aside");
 var sidenav_icons = sidenav.querySelectorAll("li a div");
 
-var sidenav_target = "../pages/" + pageName + ".html";
 
-var whiteBtn = document.querySelector("[transparent-style-btn]");
-var darkBtn = document.querySelector("[white-style-btn]");
+var transparentBtn = document.querySelector("[transparent-style-btn]");
+var whiteBtn = document.querySelector("[white-style-btn]");
 
-var non_active_style = ["bg-none", "bg-transparent", "text-blue-500", "border-blue-500"];
-var active_style = ["bg-gradient-to-tl", "from-blue-500", "to-violet-500", "bg-blue-500", "text-white", "border-transparent"];
+var non_active_style = ["bg-none", "bg-transparent", "text-fuchsia-500", "border-fuchsia-500"];
+var active_style = ["bg-gradient-to-tl", "from-purple-700", "to-pink-500", "bg-fuchsia-500", "text-white", "border-transparent"];
 
-var white_sidenav_classes = ["bg-white", "shadow-xl"];
-// var white_sidenav_highlighted = ["shadow-xl"];
-// var white_sidenav_icons = ["bg-white"];
+var transparent_sidenav_classes = ["xl:bg-transparent", "shadow-none"];
+var transparent_sidenav_highlighted = ["shadow-soft-xl"];
+var transparent_sidenav_icons = ["bg-white"];
 
-var black_sidenav_classes = ["bg-slate-850", "shadow-none"];
-// var black_sidenav_highlighted = ["shadow-none"];
-// var black_sidenav_icons = ["bg-gray-200"];
+var white_sidenav_classes = ["xl:bg-white", "shadow-soft-xl"];
+var white_sidenav_highlighted = ["shadow-none"];
+var white_sidenav_icons = ["bg-gray-200"];
 
 var sidenav_highlight = document.querySelector("a[href=" + CSS.escape(sidenav_target) + "]");
 
@@ -83,24 +83,48 @@ if (pageName != "rtl") {
 // color sidenav
 
 function sidebarColor(a) {
-  var color = a.getAttribute("data-color");
+  var color_from = a.getAttribute("data-color-from");
+  var color_to = a.getAttribute("data-color-to");
   var parent = a.parentElement.children;
-  var activeColor;
+  
+  var activeColorFrom;
+  var activeColorTo;
+  var activeSidenavIconColorClassFrom;
+  var activeSidenavIconColorClassTo;
+  var activeSidenavCardColorClassFrom;
+  var activeSidenavCardColorClassTo;
+  var activeSidenavCardIconColorClassFrom;
+  var activeSidenavCardIconColorClassTo;
+  
+  var checkedSidenavIconColorFrom = "from-" + color_from;
+  var checkedSidenavIconColorTo = "to-" + color_to;
+  
+  var checkedSidenavCardColorFrom = "after:from-" + (color_from == "purple-700" ? "slate-600" : color_from);
+  var checkedSidenavCardColorTo = "after:to-" + (color_to == "pink-500" ? "slate-300" : color_to);
+  
+  var checkedSidenavCardIconColorClassFrom = "from-" + (color_from == "purple-700" ? "slate-600" : color_from);
+  var checkedSidenavCardIconColorClassTo = "to-" + (color_to == "pink-500" ? "slate-300" : color_to);
 
-  var activeSidenavIconColorClass;
-
-  var checkedSidenavIconColor = "bg-" + color + "-500/30";
-
-  var sidenavIcon = document.querySelector("a[href=" + CSS.escape(sidenav_target) + "]");
+  var sidenavCard = document.querySelector("[sidenav-card]");
+  var sidenavCardIcon = document.querySelector("[sidenav-card-icon]");
+  var sidenavIcon = sidenav_highlight.firstElementChild;
 
   for (var i = 0; i < parent.length; i++) {
     if (parent[i].hasAttribute("active-color")) {
-      activeColor = parent[i].getAttribute("data-color");
+      activeColorFrom = parent[i].getAttribute("data-color-from");
+      activeColorTo = parent[i].getAttribute("data-color-to");
 
       parent[i].classList.toggle("border-white");
       parent[i].classList.toggle("border-slate-700");
+      
+      activeSidenavIconColorClassFrom = "from-" + activeColorFrom;
+      activeSidenavIconColorClassTo = "to-" + activeColorTo;
 
-      activeSidenavIconColorClass = "bg-" + activeColor + "-500/30";
+      activeSidenavIconColorClassFrom = "from-" + activeColorFrom;
+      activeSidenavIconColorClassTo = "to-" + activeColorTo;
+
+      activeSidenavCardIconColorClassFrom = "from-" + (activeColorFrom == "purple-700" ? "slate-600" : activeColorFrom);
+      activeSidenavCardIconColorClassTo = "to-" + (activeColorTo == "pink-500" ? "slate-300" : activeColorTo);
     }
     parent[i].removeAttribute("active-color");
   }
@@ -111,18 +135,28 @@ function sidebarColor(a) {
   a.classList.toggle("border-white");
   a.classList.toggle("border-slate-700");
 
-  //   remove active style
-
-  sidenavIcon.classList.remove(activeSidenavIconColorClass);
-
-  //   add new style
-
-  sidenavIcon.classList.add(checkedSidenavIconColor);
+  sidenavCard.classList.remove(activeSidenavCardColorClassFrom);
+  sidenavCard.classList.remove(activeSidenavCardColorClassTo);
+  
+  sidenavCardIcon.classList.remove(activeSidenavCardIconColorClassFrom);
+  sidenavCardIcon.classList.remove(activeSidenavCardIconColorClassTo);
+  
+  sidenavIcon.classList.remove(activeSidenavIconColorClassFrom);
+  sidenavIcon.classList.remove(activeSidenavIconColorClassTo);
+  
+  sidenavCard.classList.add(checkedSidenavCardColorFrom);
+  sidenavCard.classList.add(checkedSidenavCardColorTo);
+  
+  sidenavCardIcon.classList.add(checkedSidenavCardIconColorClassFrom);
+  sidenavCardIcon.classList.add(checkedSidenavCardIconColorClassTo);
+  
+  sidenavIcon.classList.add(checkedSidenavIconColorFrom);
+  sidenavIcon.classList.add(checkedSidenavIconColorTo);
 }
 
 // sidenav style
 
-whiteBtn.addEventListener("click", function () {
+transparentBtn.addEventListener("click", function () {
   const active_style_attr = document.createAttribute("active-style");
   if (!this.hasAttribute(active_style_attr)) {
     // change trigger buttons style
@@ -137,29 +171,43 @@ whiteBtn.addEventListener("click", function () {
       this.classList.add(style_class);
     });
 
-    darkBtn.removeAttribute(active_style_attr);
+    whiteBtn.removeAttribute(active_style_attr);
 
     active_style.forEach((style_class) => {
-      darkBtn.classList.remove(style_class);
+      whiteBtn.classList.remove(style_class);
     });
 
     non_active_style.forEach((style_class) => {
-      darkBtn.classList.add(style_class);
+      whiteBtn.classList.add(style_class);
     });
 
     // change actual styles
 
-    black_sidenav_classes.forEach((style_class) => {
+    white_sidenav_classes.forEach((style_class) => {
       sidenav.classList.remove(style_class);
     });
-    white_sidenav_classes.forEach((style_class) => {
+    transparent_sidenav_classes.forEach((style_class) => {
       sidenav.classList.add(style_class);
     });
-    sidenav.classList.remove("dark");
+
+    white_sidenav_highlighted.forEach((style_class) => {
+      sidenav_highlight.classList.remove(style_class);
+    });
+    transparent_sidenav_highlighted.forEach((style_class) => {
+      sidenav_highlight.classList.add(style_class);
+    });
+    for (var i = 0; i < sidenav_icons.length; i++) {
+      white_sidenav_icons.forEach((style_class) => {
+        sidenav_icons[i].classList.remove(style_class);
+      });
+      transparent_sidenav_icons.forEach((style_class) => {
+        sidenav_icons[i].classList.add(style_class);
+      });
+    }
   }
 });
 
-darkBtn.addEventListener("click", function () {
+whiteBtn.addEventListener("click", function () {
   const active_style_attr = document.createAttribute("active-style");
   if (!this.hasAttribute(active_style_attr)) {
     this.setAttributeNode(active_style_attr);
@@ -170,23 +218,39 @@ darkBtn.addEventListener("click", function () {
       this.classList.add(style_class);
     });
 
-    whiteBtn.removeAttribute(active_style_attr);
+    transparentBtn.removeAttribute(active_style_attr);
     active_style.forEach((style_class) => {
-      whiteBtn.classList.remove(style_class);
+      transparentBtn.classList.remove(style_class);
     });
     non_active_style.forEach((style_class) => {
-      whiteBtn.classList.add(style_class);
+      transparentBtn.classList.add(style_class);
     });
 
     // change actual styles
 
-    white_sidenav_classes.forEach((style_class) => {
+    transparent_sidenav_classes.forEach((style_class) => {
       sidenav.classList.remove(style_class);
     });
-    black_sidenav_classes.forEach((style_class) => {
+    white_sidenav_classes.forEach((style_class) => {
       sidenav.classList.add(style_class);
     });
-    sidenav.classList.add("dark");
+
+    transparent_sidenav_highlighted.forEach((style_class) => {
+      sidenav_highlight.classList.remove(style_class);
+    });
+
+    white_sidenav_highlighted.forEach((style_class) => {
+      sidenav_highlight.classList.add(style_class);
+    });
+
+    for (var i = 0; i < sidenav_icons.length; i++) {
+      transparent_sidenav_icons.forEach((style_class) => {
+        sidenav_icons[i].classList.remove(style_class);
+      });
+      white_sidenav_icons.forEach((style_class) => {
+        sidenav_icons[i].classList.add(style_class);
+      });
+    }
   }
 });
 
@@ -196,32 +260,13 @@ if (navbar) {
   if (navbar.getAttribute("navbar-scroll") == "true") {
     buttonNavbarFixed.setAttribute("checked", "true");
   }
-  const white_elements = navbar.querySelectorAll(".text-white");
-  const white_bg_elements = navbar.querySelectorAll("[sidenav-trigger] i.bg-white");
-  const white_before_elements = navbar.querySelectorAll(".before\\:text-white");
   buttonNavbarFixed.addEventListener("change", function () {
-
     if (this.checked) {
-      white_elements.forEach(element => {
-        element.classList.remove("text-white")
-        element.classList.add("dark:text-white")
-      });
-      white_bg_elements.forEach(element => {
-        element.classList.remove("bg-white")
-        element.classList.add("dark:bg-white")
-        element.classList.add("bg-slate-500")
-      });
-      white_before_elements.forEach(element => {
-        element.classList.add("dark:before:text-white")
-        element.classList.remove("before:text-white")
-      });
       navbar.setAttribute("navbar-scroll", "true");
       navbar.classList.add("sticky");
       navbar.classList.add("top-[1%]");
-      navbar.classList.add("backdrop-saturate-200");
-      navbar.classList.add("backdrop-blur-2xl");
-      navbar.classList.add("dark:bg-slate-850/80");
-      navbar.classList.add("dark:shadow-dark-blur");
+      navbar.classList.add("backdrop-saturate-[200%]");
+      navbar.classList.add("backdrop-blur-[30px]");
       navbar.classList.add("bg-[hsla(0,0%,100%,0.8)]");
       navbar.classList.add("shadow-blur");
       navbar.classList.add("z-110");
@@ -229,41 +274,14 @@ if (navbar) {
       navbar.setAttribute("navbar-scroll", "false");
       navbar.classList.remove("sticky");
       navbar.classList.remove("top-[1%]");
-      navbar.classList.remove("backdrop-saturate-200");
-      navbar.classList.remove("backdrop-blur-2xl");
-      navbar.classList.remove("dark:bg-slate-850/80");
-      navbar.classList.remove("dark:shadow-dark-blur");
+      navbar.classList.remove("backdrop-saturate-[200%]");
+      navbar.classList.remove("backdrop-blur-[30px]");
       navbar.classList.remove("bg-[hsla(0,0%,100%,0.8)]");
       navbar.classList.remove("shadow-blur");
       navbar.classList.remove("z-110");
-      white_elements.forEach(element => {
-        element.classList.add("text-white")
-        element.classList.remove("dark:text-white")
-      });
-      white_bg_elements.forEach(element => {
-        element.classList.add("bg-white")
-        element.classList.remove("dark:bg-white")
-        element.classList.remove("bg-slate-500")
-      });
-      white_before_elements.forEach(element => {
-        element.classList.remove("dark:before:text-white")
-        element.classList.add("before:text-white")
-      });
     }
   });
 } else {
   // buttonNavbarFixed.setAttribute("checked", "true");
   buttonNavbarFixed.setAttribute("disabled", "true");
 }
-
-var dark_mode_toggle = document.querySelector("[dark-toggle]");
-var root_html = document.querySelector("html");
-
-dark_mode_toggle.addEventListener("change", function () {
-  dark_mode_toggle.setAttribute("manual", "true");
-  if (this.checked) {
-    root_html.classList.add("dark");
-  } else {
-    root_html.classList.remove("dark");
-  }
-});
