@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Kualitas',
                 'type' => 'benefit',
-                'weight' => 0.4,
+                'weight' => 0.3,
             ],
             [
                 'name' => 'Fitur',
@@ -44,6 +44,11 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Garansi',
                 'type' => 'benefit',
                 'weight' => 0.05,
+            ],
+            [
+                'name' => 'Biaya perawatan',
+                'type' => 'cost',
+                'weight' => 0.1,
             ],
             [
                 'name' => 'Layanan pelanggan',
@@ -65,7 +70,33 @@ class DatabaseSeeder extends Seeder
                 'type' => 'benefit',
                 'weight' => 0.05,
             ],
+
         ];
         DB::table('criterias')->insert($criterias);
+
+        $alternatives = [
+            [
+                'name' => 'Xiaomi Redmi Note 9 Pro',
+            ],
+            [
+                'name' => 'Samsung Galaxy A51',
+            ],
+            [
+                'name'=> 'Realme 6 Pro',
+            ],
+            [
+                'name'=> 'Samsung Galaxy A31',
+            ],
+            [
+                'name' => 'Xiaomi Redmi Note 8 Pro',
+            ],
+            [
+                'name'=> 'iPhone 11 Pro Max',
+            ],
+            [
+                'name'=> 'Samsung Galaxy S20 Ultra',
+            ]
+        ];
+        DB::table('alternatives')->insert($alternatives);
     }
 }

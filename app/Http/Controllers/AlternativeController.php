@@ -13,8 +13,9 @@ class AlternativeController extends Controller
      */
     public function index()
     {
-        $alternative = Alternative::orderBy('id')->get();
-        return view('dashboard.alternative', compact('alternative'));
+        $alternatives = Alternative::orderBy('id')->get();
+        $lastAlternativeId = Alternative::orderBy('id', 'desc')->first()->id ?? 0;
+        return view('dashboard.alternative', compact('alternatives', 'lastAlternativeId'));
     }
 
     /**
