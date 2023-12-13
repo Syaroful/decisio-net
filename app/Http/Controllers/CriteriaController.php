@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Criteria;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreCriteriaRequest;
 use App\Http\Requests\UpdateCriteriaRequest;
 
@@ -65,9 +66,17 @@ class CriteriaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $criteria)
+    public function destroy(Criteria $criteria)
     {
-        Criteria::find($criteria)->delete();
-        return redirect()->back();
+
+
+        try {
+            DB::table('criterias')->where('id', $criteria->id)->delete();
+        }catch(\Illuminate\Database\QueryException $e){
+            if($e->getCode() == "23000")
+                return redirect()->back()->with('warning', 'Data kriteria gagal dihapus karena masih terdapat data alternatif yang menggunakan kriteria ini');
+        }
+
+        return redirect()->back()->with('success', 'Data kriteria berhasil dihapus');
     }
 }

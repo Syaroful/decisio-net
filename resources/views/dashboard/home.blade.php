@@ -105,14 +105,27 @@
                         <div class="flex flex-wrap -mx-3">
                             <div class="max-w-full px-3 lg:w-1/2 lg:flex-none">
                                 <div class="flex flex-col h-full">
-                                    <p class="pt-2 mb-1 font-semibold">Ini Nanti Penjelasan Metode</p>
-                                    <h5 class="font-bold">Ini nama Metode</h5>
+                                    <p class="pt-2 mb-1 font-semibold">Penjelasan Metode</p>
+                                    <h5 class="font-bold">Metode TOPSIS</h5>
                                     <p class="mb-12">
-                                        disini nnati penjelasan singkat tentang metode, terus readmore-nya menuju ke
-                                        web yang menjelasakan
+                                        Metode SPK TOPSIS (Technique for Order Preference by Similarity to Ideal Solution)
+                                        adalah suatu teknik yang digunakan dalam pengambilan keputusan multi-kriteria untuk
+                                        memilih alternatif terbaik dari sejumlah pilihan yang tersedia. Langkah-langkah
+                                        dalam metode ini dimulai dengan mengidentifikasi kriteria yang relevan, normalisasi
+                                        matriks keputusan untuk membandingkan nilai kriteria secara objektif, dan pembobotan
+                                        kriteria berdasarkan tingkat kepentingannya. Setelah itu, dilakukan perhitungan
+                                        matriks solusi ideal positif dan negatif untuk menentukan nilai ideal dari setiap
+                                        kriteria. Kemudian, dihitung jarak setiap alternatif terhadap solusi ideal positif
+                                        dan negatif, serta skor proksimitas relatif untuk menentukan kedekatan relatif
+                                        setiap alternatif terhadap solusi ideal. Dari perhitungan ini, alternatif dengan
+                                        skor proksimitas terbesar atau terdekat dengan solusi ideal positif dan terjauh dari
+                                        solusi ideal negatif akan diurutkan sebagai alternatif terbaik. Metode TOPSIS ini
+                                        sering digunakan dalam berbagai bidang untuk membantu pengambilan keputusan yang
+                                        lebih terukur dan sistematis dalam situasi di mana ada banyak pilihan dan kriteria
+                                        yang perlu dipertimbangkan.
                                     </p>
                                     <a class="mt-auto mb-0 font-semibold leading-normal text-sm group text-slate-500"
-                                        href="javascript:;">
+                                        href="https://robertsoczewica.medium.com/what-is-topsis-b05c50b3cd05" target="_blank">
                                         Read More
                                         <i
                                             class="fas fa-arrow-right ease-bounce text-sm group-hover:translate-x-1.25 ml-1 leading-normal transition-all duration-200"></i>

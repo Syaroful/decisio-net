@@ -19,7 +19,7 @@ class MabacController extends Controller
     public function index()
     {
         if (!$this->assessmentFilled()) {
-            return redirect()->route('values.index')->with('warning', 'Please fill the assessment first');
+            return redirect()->route('home.index')->with('warning', 'Please fill the assessment first');
         }
         $criteria = Criteria::all();
         $alternative = Alternative::all();

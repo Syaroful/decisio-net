@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Value;
 use App\Http\Requests\StoreValueRequest;
 use App\Http\Requests\UpdateValueRequest;
 use App\Models\Alternative;
 use App\Models\Criteria;
+use App\Models\Value;
 
 class ValueController extends Controller
 {
@@ -15,11 +15,10 @@ class ValueController extends Controller
      */
     public function index()
     {
-        $alternative = Alternative::all();
+        $alternatives = Alternative::all();
         $criteria = Criteria::all();
-        $value = Value::with('criteria', 'alternative')->get();
-        return view('dashboard.score', compact(['value', 'alternative', 'criteria']));
-
+        $value = Value::with(['criteria', 'alternatives'])->get();
+        return view('dashboard.score', compact(['criteria', 'alternatives', 'value']));
     }
 
     /**
@@ -35,23 +34,28 @@ class ValueController extends Controller
      */
     public function store(StoreValueRequest $request)
     {
-        $request->validated(
+        $request->validate(
             [
-                'id_alternative' => 'required|exists:alternatives,id',
-                'value' => 'required|numeric|min:0,01|max:1',
+                'alternative_id' => 'required|exists:alternatives,id',
+                'value.*' => 'required|numeric|min:0,01|max:1',
             ]
         );
         $alternative_id = $request->input('alternative_id');
-        $value = $request->input('value');
+        $valueData = $request->input('value');
 
-        foreach ($alternative_id as $key => $value) {
-            $data = [
-                'alternative_id' => $alternative_id[$key],
-                'criteria_id' => $key,
-                'value' => $value,
-            ];
-            Value::updateOrCreate($data);
+        foreach ($valueData as $criteria_id => $value) {
+            Value::updateOrCreate(
+                [
+                    'alternative_id' => $alternative_id,
+                    'criteria_id' => $criteria_id,
+                ],
+                [
+                    'value' => $value,
+                ]
+            );
         }
+
+        return redirect()->back()->with('success', 'Data nilai berhasil disimpan');
     }
 
     /**

@@ -12,7 +12,7 @@
                             Criteria</button>
                     </div>
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                        <h6>Authors table</h6>
+                        <h6>Tabel Criteria</h6>
                     </div>
 
                     <div class="flex-auto px-0 pt-0 pb-2">
