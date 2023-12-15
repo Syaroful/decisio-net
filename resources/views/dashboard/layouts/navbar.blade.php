@@ -17,10 +17,10 @@
                         Alternative
                     @elseif(Request::is('values'))
                         Matrix Score
-                    @elseif(Request::is('mabac'))
+                    @elseif(Request::is('topsis'))
                         Calculation
                     @else
-                        Unknown
+                        Unknown\
                     @endif
                 </li>
             </ol>
@@ -33,7 +33,7 @@
                         Alternative
                     @elseif(Request::is('values'))
                         Matrix Score
-                    @elseif(Request::is('mabac'))
+                    @elseif(Request::is('topsis'))
                         Calculation
                     @else
                         Unknown

@@ -6,11 +6,6 @@
             <div class="flex-none w-full max-w-full px-3">
                 <div
                     class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
-                    <div class="w-1/4 p-6 pb-0">
-                        <button type="button" data-modal-target="add-criteria" data-modal-toggle="add-criteria"
-                            class="inline-block px-6 py-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-gradient-to-tl from-purple-700 to-pink-500 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs">Tambahkan
-                            Criteria</button>
-                    </div>
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                         <h6>Tabel Matrix Penilaian</h6>
                     </div>
@@ -51,9 +46,9 @@
                                                         ->first();
                                                 @endphp
                                                 <td
-                                                    class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                    class="p-2 text-start align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                     <span class="text-sm leading-tight text-slate-400">
-                                                        {{ $penilaianForCriteria ? $penilaianForCriteria->value : 0 }}
+                                                        {{ $penilaianForCriteria ? $penilaianForCriteria->score : 0 }}
                                                     </span>
                                                 </td>
                                             @endforeach

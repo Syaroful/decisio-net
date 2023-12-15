@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('alternative_id')->references('id')->on('alternatives')->onDelete('cascade');
             $table->unsignedBigInteger('criteria_id');
             $table->foreign('criteria_id')->references('id')->on('criterias')->onDelete('cascade');
-            $table->double('value');
+            $table->double('score');
         });
     }
 

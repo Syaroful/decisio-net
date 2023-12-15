@@ -17,7 +17,7 @@ class ValueController extends Controller
     {
         $alternatives = Alternative::all();
         $criteria = Criteria::all();
-        $value = Value::with(['criteria', 'alternatives'])->get();
+        $value = Value::all();
         return view('dashboard.score', compact(['criteria', 'alternatives', 'value']));
     }
 
@@ -37,20 +37,20 @@ class ValueController extends Controller
         $request->validate(
             [
                 'alternative_id' => 'required|exists:alternatives,id',
-                'value.*' => 'required|numeric|min:0,01|max:1',
+                'score.*' => 'required|numeric|min:0,01|max:1',
             ]
         );
         $alternative_id = $request->input('alternative_id');
-        $valueData = $request->input('value');
+        $valueData = $request->input('score');
 
-        foreach ($valueData as $criteria_id => $value) {
+        foreach ($valueData as $criteria_id => $score) {
             Value::updateOrCreate(
                 [
                     'alternative_id' => $alternative_id,
                     'criteria_id' => $criteria_id,
                 ],
                 [
-                    'value' => $value,
+                    'score' => $score,
                 ]
             );
         }

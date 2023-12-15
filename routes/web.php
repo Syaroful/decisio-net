@@ -6,6 +6,7 @@ use App\Http\Controllers\AlternativeController;
 use App\Http\Controllers\ValueController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MabacController;
+use App\Http\Controllers\TopsisController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,6 @@ Route::prefix('/')->group(function(){
     Route::resource('criterias', CriteriaController::class);
     Route::resource('alternatives', AlternativeController::class);
     Route::resource('values', ValueController::class);
-    Route::resource('mabac', MabacController::class);
+    Route::resource('topsis', TopsisController::class);
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
 });

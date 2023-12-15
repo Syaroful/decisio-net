@@ -36,12 +36,13 @@
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
-    @vite(['resources/css/app.css','resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="m-0 font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500">
     <!-- sidenav  -->
     @include('dashboard.layouts.side_navbar')
+    @include('sweetalert::alert')
     <!-- end sidenav -->
 
     <main class="ease-soft-in-out xl:ml-68.5 relative h-full max-h-screen rounded-xl transition-all duration-200">

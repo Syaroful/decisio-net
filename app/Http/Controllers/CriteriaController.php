@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Criteria;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreCriteriaRequest;
 use App\Http\Requests\UpdateCriteriaRequest;
@@ -15,6 +16,11 @@ class CriteriaController extends Controller
     public function index()
     {
         $criteria = Criteria::orderBy('id')->get();
+
+        $title = 'Hapus Kriteria!';
+        $text = "Apakah anda yakin ingin menghapus data ini?";
+        confirmDelete($title, $text);
+
         return view('dashboard.criteria', compact('criteria'));
     }
 
@@ -34,6 +40,7 @@ class CriteriaController extends Controller
         $data = $request->validated();
         Criteria::create($data);
         return redirect()->back();
+
     }
 
     /**
@@ -68,15 +75,13 @@ class CriteriaController extends Controller
      */
     public function destroy(Criteria $criteria)
     {
-
-
         try {
             DB::table('criterias')->where('id', $criteria->id)->delete();
         }catch(\Illuminate\Database\QueryException $e){
             if($e->getCode() == "23000")
                 return redirect()->back()->with('warning', 'Data kriteria gagal dihapus karena masih terdapat data alternatif yang menggunakan kriteria ini');
         }
-
+        Alert::success('Success', 'Data kriteria berhasil dihapus');
         return redirect()->back()->with('success', 'Data kriteria berhasil dihapus');
     }
 }
