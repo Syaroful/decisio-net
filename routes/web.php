@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::prefix('/')->group(function(){
+Route::prefix('/')->group (function () {
     Route::resource('criterias', CriteriaController::class);
     Route::resource('alternatives', AlternativeController::class);
     Route::resource('values', ValueController::class);

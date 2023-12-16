@@ -65,11 +65,6 @@ class DatabaseSeeder extends Seeder
                 'type' => 'benefit',
                 'weight' => 0.05,
             ],
-            [
-                'name' => 'Ketersediaan',
-                'type' => 'benefit',
-                'weight' => 0.05,
-            ],
 
         ];
         DB::table('criterias')->insert($criterias);
@@ -132,14 +127,12 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'BlackBerry Key2',
             ],
-            [
-                'name' => 'HTC U12 Plus',
-            ],
+
         ];
         DB::table('alternatives')->insert($alternatives);
 
-        $criteriasCount = 10;
-        $alternativesCount = 20;
+        $criteriasCount = 9;
+        $alternativesCount = 19;
 
         for ($i = 0; $i < $criteriasCount; $i++) {
             for ($j = 0; $j < $alternativesCount; $j++) {

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Criteria;
-use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreCriteriaRequest;
 use App\Http\Requests\UpdateCriteriaRequest;
+use App\Models\Criteria;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CriteriaController extends Controller
 {
@@ -39,6 +39,7 @@ class CriteriaController extends Controller
     {
         $data = $request->validated();
         Criteria::create($data);
+        Alert::success('Success', 'Data kriteria berhasil ditambahkan');
         return redirect()->back();
 
     }
@@ -66,8 +67,8 @@ class CriteriaController extends Controller
     {
         $criteria = Criteria::findOrFail($request->id);
         $data = $request->validated();
-        $criteria->update($data);
-        return redirect()->back();
+        $criteria -> update($data);
+        return redirect()-> back();
     }
 
     /**
@@ -77,9 +78,11 @@ class CriteriaController extends Controller
     {
         try {
             DB::table('criterias')->where('id', $criteria->id)->delete();
-        }catch(\Illuminate\Database\QueryException $e){
-            if($e->getCode() == "23000")
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() == "23000") {
                 return redirect()->back()->with('warning', 'Data kriteria gagal dihapus karena masih terdapat data alternatif yang menggunakan kriteria ini');
+            }
+
         }
         Alert::success('Success', 'Data kriteria berhasil dihapus');
         return redirect()->back()->with('success', 'Data kriteria berhasil dihapus');

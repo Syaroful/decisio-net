@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alternative;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreAlternativeRequest;
 use App\Http\Requests\UpdateAlternativeRequest;
 
@@ -15,6 +17,11 @@ class AlternativeController extends Controller
     {
         $alternatives = Alternative::orderBy('id')->get();
         $lastAlternativeId = Alternative::orderBy('id', 'desc')->first()->id ?? 0;
+
+        $title = 'Hapus Kriteria!';
+        $text = "Apakah anda yakin ingin menghapus data ini?";
+        confirmDelete($title, $text);
+
         return view('dashboard.alternative', compact('alternatives', 'lastAlternativeId'));
     }
 
@@ -68,7 +75,15 @@ class AlternativeController extends Controller
      */
     public function destroy(Alternative $alternative)
     {
-        Alternative::findOrFail($alternative->id)->delete();
-        return redirect()->back();
+        try {
+            DB::table('alternatives')->where('id', $alternative->id)->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() == "23000") {
+                return redirect()->back()->with('warning', 'Data kriteria gagal dihapus karena masih terdapat data alternatif yang menggunakan kriteria ini');
+            }
+
+        }
+        Alert::success('Success', 'Data alternative berhasil dihapus');
+        return redirect()->back()->with('success', 'Data alternative berhasil dihapus');
     }
 }

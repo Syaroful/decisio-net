@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.main')
-@section('title', 'criteria')
+@section('title', 'criterias')
 @section('content')
     <div class="w-full px-6 py-6 mx-auto">
         <div class="flex flex-wrap -mx-3">
@@ -75,26 +75,72 @@
                                                     <ul dropdown-menu
                                                         class="z-10 text-sm lg:shadow-soft-3xl duration-250 before:duration-350 before:font-awesome before:ease-soft w-32 before:text-5.5 transform-dropdown pointer-events-none absolute top-0 m-0 list-none rounded-lg border-0 border-solid border-transparent bg-white bg-clip-padding px-0 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-7 before:left-auto before:top-0 before:z-40 before:text-white before:transition-all before:content-['\f0d8']">
                                                         <li>
-                                                            <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-4 text-left font-normal text-slate-500 hover:bg-gray-200 hover:text-slate-700"
-                                                                href="javascript:;">Edit</a>
+                                                            <button type="button"
+                                                                data-modal-target="edit-criteria-{{ $criterion->id }}"
+                                                                data-modal-toggle="edit-criteria-{{ $criterion->id }}"
+                                                                class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-4 text-left font-normal text-slate-500 hover:bg-gray-200 hover:text-slate-700">Edit</button>
                                                         </li>
                                                         <li>
                                                             <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-4 text-left font-normal text-slate-500 hover:bg-gray-200 hover:text-slate-700"
-                                                                href="{{ route('criterias.destroy', $criterion->id)}}" data-confirm-delete="true">Delete</a>
+                                                                href="{{ route('criterias.destroy', $criterion->id) }}"
+                                                                data-confirm-delete="true">Delete</a>
                                                         </li>
-                                                        <li>
-                                                            <form id="{{ $criterion->id }}"
-                                                                action="{{ route('criterias.destroy', $criterion->id) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <button
-                                                                    class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-4 text-left font-normal text-slate-500 hover:bg-gray-200 hover:text-slate-700"
-                                                                    type="submit" data>Delete</button>
-                                                            </form>
-                                                        </li>
+
                                                     </ul>
+                                                    {{-- Modal Body --}}
+                                                    <div class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-1 left-0 z-50 justify-center items-center text-left w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+                                                        id="edit-criteria-{{ $criterion->id }}" tabindex="-1"
+                                                        aria-hidden="true">
+                                                        <div
+                                                            class="relative w-96 m-2 transition-transform duration-300 pointer-events-none sm:m-7 sm:max-w-125 sm:mx-auto lg:mt-2 ease-soft-out -translate-y-13">
+                                                            <div
+                                                                class="relative flex flex-col w-full bg-white border border-solid pointer-events-auto bg-clip-padding border-black/20 rounded-xl outline-0">
+                                                                <form id="edit-form-{{ $criterion->id }}"
+                                                                    action="{{ route('criterias.update', $criterion->id) }}"
+                                                                    class="p-4 md:p-5" method="POST">
+                                                                    @method('PUT')
+                                                                    @csrf
+                                                                    <div
+                                                                        class="flex items-center justify-between p-4 border-b border-solid shrink-0 border-slate-100 rounded-t-xl">
+                                                                        <h5 class="mb-0 leading-normal" id="ModalLabel">Edit
+                                                                            Criteria C{{ $criterion->id }}</h5>
+
+                                                                        <button type="button"
+                                                                            data-modal-toggle="edit-criteria-{{ $criterion->id }}"
+                                                                            class="fa fa-close w-4 h-4 ml-auto box-content p-2 text-black border-0 rounded-1.5 opacity-50 cursor-pointer -m-2 "
+                                                                            data-dismiss="edit-criteria-{{ $criterion->id }}"></button>
+                                                                    </div>
+                                                                    <div class="relative flex-auto p-4">
+                                                                        <p>Nama Criteria</p>
+                                                                        <input dropzone type="text" name="name"
+                                                                            id="name" value="{{ $criterion->name }}"
+                                                                            required
+                                                                            class="mb-4 mt-2 focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+                                                                        <p>Tipe</p>
+                                                                        <select name="type" id="type" required
+                                                                            class="mb-4 mt-2 focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+                                                                            <option value="benefit">Benefit</option>
+                                                                            <option value="cost">Cost</option>
+                                                                        </select>
+                                                                        <p>Bobot</p>
+                                                                        <input dropzone type="number" name="weight"
+                                                                            id="weight" step="0.01"
+                                                                            value="{{ $criterion->weight }}" required
+                                                                            class="mb-4 mt-2 focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+                                                                    </div>
+                                                                    <div
+                                                                        class="flex flex-wrap items-center justify-end p-3 border-t border-solid shrink-0 border-slate-100 rounded-b-xl">
+                                                                        <button type="submit"
+                                                                            class="inline-block px-8 py-2 m-1 mb-4 text-xs font-bold text-center text-white uppercase align-middle transition-all border-0 rounded-lg cursor-pointer ease-soft-in leading-pro tracking-tight-soft bg-gradient-to-tl from-purple-700 to-pink-500 shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85">Update
+                                                                            Criteria</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -103,44 +149,7 @@
                         </div>
                     </div>
 
-                    <div class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-1 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
-                        id="add-criteria" aria-hidden="true">
-                        <div
-                            class="relative w-96 m-2 transition-transform duration-300 pointer-events-none sm:m-7 sm:max-w-125 sm:mx-auto lg:mt-2 ease-soft-out -translate-y-13">
-                            <div
-                                class="relative flex flex-col w-full bg-white border border-solid pointer-events-auto bg-clip-padding border-black/20 rounded-xl outline-0">
-                                <form action="{{ route('criterias.store') }}" method="post">
-                                    <div
-                                        class="flex items-center justify-between p-4 border-b border-solid shrink-0 border-slate-100 rounded-t-xl">
-                                        <h5 class="mb-0 leading-normal" id="ModalLabel">Tambahkan Criteria Baru</h5>
-
-                                        <button type="button" data-modal-toggle="add-criteria"
-                                            class="fa fa-close w-4 h-4 ml-auto box-content p-2 text-black border-0 rounded-1.5 opacity-50 cursor-pointer -m-2 "
-                                            data-dismiss="add-criteria"></button>
-                                    </div>
-                                    <div class="relative flex-auto p-4">
-                                        <p>Nama Criteria</p>
-                                        <input dropzone type="text" placeholder="eg: Harga"
-                                            class="mb-4 mt-2 focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
-                                        <p>Tipe</p>
-                                        <select name="type" id="type"
-                                            class="mb-4 mt-2 focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
-                                            <option value="benefit">Benefit</option>
-                                            <option value="cost">Cost</option>
-                                        </select>
-                                        <p>Bobot</p>
-                                        <input dropzone type="number" step="0.01" value="0.01"
-                                            class="mb-4 mt-2 focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
-                                    </div>
-                                    <div
-                                        class="flex flex-wrap items-center justify-end p-3 border-t border-solid shrink-0 border-slate-100 rounded-b-xl">
-                                        <button type="button" data-toggle="modal" data-target="#import"
-                                            class="inline-block px-8 py-2 m-1 mb-4 text-xs font-bold text-center text-white uppercase align-middle transition-all border-0 rounded-lg cursor-pointer ease-soft-in leading-pro tracking-tight-soft bg-gradient-to-tl from-purple-700 to-pink-500 shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85">Upload</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                    @include('dashboard.layouts.modal.criteria_store_modal')
 
                 </div>
             </div>

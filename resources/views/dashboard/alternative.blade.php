@@ -59,15 +59,9 @@
                                                                 href="javascript:;">Edit</a>
                                                         </li>
                                                         <li>
-                                                            <form id="{{ $alternative->id }}"
-                                                                action="{{ route('alternatives.destroy', $alternative->id) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <button
-                                                                    class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-4 text-left font-normal text-slate-500 hover:bg-gray-200 hover:text-slate-700"
-                                                                    type="submit">Delete</button>
-                                                            </form>
+                                                            <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-4 text-left font-normal text-slate-500 hover:bg-gray-200 hover:text-slate-700"
+                                                                href="{{ route('alternatives.destroy', $alternative->id) }}"
+                                                                data-confirm-delete="true">Delete</a>
                                                         </li>
                                                     </ul>
                                                 </div>

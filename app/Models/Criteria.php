@@ -12,7 +12,7 @@ class Criteria extends Model
     public $timestamps = false;
 
     protected $fillable = [
-
+        'id', // tambahkan ini
         'name',
         'type',
         'weight',
