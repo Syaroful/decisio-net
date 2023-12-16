@@ -390,7 +390,7 @@
                 <div
                     class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                        <h6>solusi_ideal_negatif</h6>
+                        <h6>Ranking</h6>
                     </div>
 
                     <div class="flex-auto px-0 pt-0 pb-2">
@@ -428,7 +428,7 @@
                                             <td
                                                 class="p-6 text-start align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                 <span class="text-sm leading-tight text-slate-400">
-                                                    {{ $ranking[$alternative->id - 1] + 1 ?? '-' }}
+                                                    {{ $ranking[$alternative->id-1] ?? '-' }}
                                                 </span>
                                             </td>
 

@@ -27,6 +27,7 @@ class TopsisController extends Controller
         $nilai_preferensi = $this->hitungNilaiPreferensi($jarak_solusi_ideal_positif, $jarak_solusi_ideal_negatif);
 
         $ranking = $this->hitungRanking($nilai_preferensi);
+        $cek = count($ranking);
 
         return view('dashboard.calculation', compact(
             'criterias',
@@ -133,7 +134,7 @@ class TopsisController extends Controller
             for ($j = 0; $j < count($matrik_normalisasi_terbobot); $j++) {
                 $jarak += pow(($solusi_ideal_positif[$j] - $matrik_normalisasi_terbobot[$j][$i]), 2);
             }
-            $jarak_solusi_ideal_negatif[$i] = sqrt($jarak);
+            $jarak_solusi_ideal_negatif[$i] = round(sqrt($jarak), 3);
 
         }
         return $jarak_solusi_ideal_negatif;
@@ -148,7 +149,7 @@ class TopsisController extends Controller
             for ($j = 0; $j < count($matrik_normalisasi_terbobot); $j++) {
                 $jarak += pow(($solusi_ideal_negatif[$j] - $matrik_normalisasi_terbobot[$j][$i]), 2);
             }
-            $jarak_solusi_ideal_negatif[$i] = sqrt($jarak);
+            $jarak_solusi_ideal_negatif[$i] = round(sqrt($jarak), 3);
 
         }
         return $jarak_solusi_ideal_negatif;
@@ -158,18 +159,25 @@ class TopsisController extends Controller
     {
         $nilai_preferensi = [];
         for ($i = 0; $i < count($jarak_solusi_ideal_positif); $i++) {
-            $nilai_preferensi[$i] = $jarak_solusi_ideal_negatif[$i] / ($jarak_solusi_ideal_positif[$i] + $jarak_solusi_ideal_negatif[$i]);
+            $nilai_preferensi[$i] = round($jarak_solusi_ideal_negatif[$i] / ($jarak_solusi_ideal_positif[$i] + $jarak_solusi_ideal_negatif[$i]), 3);
         }
         return $nilai_preferensi;
     }
 
     private function hitungRanking($nilai_preferensi)
     {
-        $ranking = [];
+
+        // Sort rankings in descending order
         arsort($nilai_preferensi);
-        foreach ($nilai_preferensi as $alternative => $value) {
-            $ranking[] = $alternative;
+
+        // Assign new rankings
+        $ranking = [];
+        $rankingValue = 1;
+        foreach ($nilai_preferensi as $alternatifId => $totalRanking) {
+            $ranking[$alternatifId] = $rankingValue;
+            $rankingValue++;
         }
         return $ranking;
     }
+
 }
