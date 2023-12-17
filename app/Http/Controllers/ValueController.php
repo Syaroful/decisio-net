@@ -9,7 +9,6 @@ use App\Models\Criteria;
 use App\Models\Value;
 use RealRashid\SweetAlert\Facades\Alert;
 
-
 class ValueController extends Controller
 {
     /**
@@ -36,28 +35,22 @@ class ValueController extends Controller
      */
     public function store(StoreValueRequest $request)
     {
-        $request->validate(
-            [
-                'alternative_id' => 'required|exists:alternatives,id',
-                'score.*' => 'required|numeric|min:0,01|max:1',
-            ]
-        );
-        $alternative_id = $request->input('alternative_id');
-        $valueData = $request->input('score');
+        $request->validate([
+            'alternative_id' => 'required|exists:alternatives,id',
+            'score.*' => 'required|numeric|min:0|between:0,99.99',
+        ]);
 
-        foreach ($valueData as $criteria_id => $score) {
+        $alternative_id = $request->input('alternative_id');
+        $scoreData = $request->input('score');
+
+        foreach ($scoreData as $criteria_id => $score) {
             Value::updateOrCreate(
-                [
-                    'alternative_id' => $alternative_id,
-                    'criteria_id' => $criteria_id,
-                ],
-                [
-                    'score' => $score,
-                ]
+                ['alternative_id' => $alternative_id, 'criteria_id' => $criteria_id],
+                ['score' => $score]
             );
         }
-        Alert::success('Success', 'Data nilai berhasil ditambahkan');
-        return redirect()->back();
+
+        return redirect()->back()->with('success', 'Pescorean added successfully');
     }
 
     /**
@@ -101,7 +94,7 @@ class ValueController extends Controller
                 ]
             );
         }
-        Alert::success('Success', 'Data nilai berhasil ditambahkan');
+        Alert::success('Success', 'Data score berhasil ditambahkan');
         return redirect()->back();
     }
 
