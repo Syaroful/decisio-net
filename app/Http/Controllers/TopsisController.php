@@ -5,11 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Alternative;
 use App\Models\Criteria;
 use App\Models\Value;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TopsisController extends Controller
 {
+    public function assessmentFilled()
+    {
+        //cek apakah sudah ada data di tabel values
+        $assessment = Value::all();
+        return $assessment->isNotEmpty();
+    }
+
     public function index()
     {
+
+        if (!$this->assessmentFilled()) {
+            Alert::error("Error", "Data penilaian belum diisi!");
+            return redirect()->route('values.index');
+
+        }
         $criterias = Criteria::all();
         $alternatives = Alternative::all();
         $values = Value::all();

@@ -40,6 +40,7 @@ class AlternativeController extends Controller
     {
         $data = $request->validated();
         Alternative::create($data);
+        Alert::success('Success', 'Data alternative berhasil ditambahkan');
         return redirect()->back();
     }
 

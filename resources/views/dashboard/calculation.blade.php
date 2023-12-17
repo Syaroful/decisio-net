@@ -411,7 +411,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($alternatives as $alternative)
-                                        <tr>
+                                        <tr class="{{ $ranking[$alternative->id - 1] == 1 ? ' bg-pink-50' : '' }}">
                                             <td
                                                 class="px-6 text-start align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                 <span class="text-sm leading-tight text-slate-400">

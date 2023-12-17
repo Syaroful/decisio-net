@@ -12,10 +12,10 @@
                             <div class="flex-none w-2/3 max-w-full px-3">
                                 <div>
                                     <p class="mb-0 font-sans font-semibold leading-normal text-sm">
-                                        Score terbaik
+                                        Sistem Pendukung Keputusan dengan:
                                     </p>
                                     <h5 class="mb-0 font-bold">
-                                        Alternatif 1
+                                        Metode TOPSIS
 
                                     </h5>
                                 </div>
