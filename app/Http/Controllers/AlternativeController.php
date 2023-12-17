@@ -68,6 +68,7 @@ class AlternativeController extends Controller
         $alternative = Alternative::findOrFail($request->id);
         $data = $request->validated();
         $alternative->update($data);
+        Alert::success('success','Data alternative berhasil diubah');
         return redirect()->back();
     }
 

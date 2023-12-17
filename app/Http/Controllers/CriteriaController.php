@@ -68,6 +68,7 @@ class CriteriaController extends Controller
         $criteria = Criteria::findOrFail($request->id);
         $data = $request->validated();
         $criteria -> update($data);
+        Alert::success('success','Data kriteria berhasil diubah');
         return redirect()-> back();
     }
 

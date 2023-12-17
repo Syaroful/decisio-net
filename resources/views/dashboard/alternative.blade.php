@@ -45,7 +45,6 @@
                                                 <span class="text-sm leading-tight text-slate-400">
                                                     {{ $alternative->name }}
                                                 </span>
-
                                             </td>
                                             <td
                                                 class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
@@ -55,8 +54,9 @@
                                                     <ul dropdown-menu
                                                         class="z-10 text-sm lg:shadow-soft-3xl duration-250 before:duration-350 before:font-awesome before:ease-soft w-32 before:text-5.5 transform-dropdown pointer-events-none absolute top-0 m-0 list-none rounded-lg border-0 border-solid border-transparent bg-white bg-clip-padding px-0 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-7 before:left-auto before:top-0 before:z-40 before:text-white before:transition-all before:content-['\f0d8']">
                                                         <li>
-                                                            <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-4 text-left font-normal text-slate-500 hover:bg-gray-200 hover:text-slate-700"
-                                                                href="javascript:;">Edit</a>
+                                                            <a data-modal-target="edit-alternative-{{ $alternative->id }}"
+                                                                data-modal-toggle="edit-alternative-{{ $alternative->id }}" class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-4 text-left font-normal text-slate-500 hover:bg-gray-200 hover:text-slate-700"
+                                                                href="#">Edit</a>
                                                         </li>
                                                         <li>
                                                             <a class="py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap border-0 bg-transparent px-4 text-left font-normal text-slate-500 hover:bg-gray-200 hover:text-slate-700"
@@ -64,6 +64,7 @@
                                                                 data-confirm-delete="true">Delete</a>
                                                         </li>
                                                     </ul>
+                                                    @include('dashboard.layouts.modal.alternative_update_modal')
                                                 </div>
                                             </td>
                                         </tr>
