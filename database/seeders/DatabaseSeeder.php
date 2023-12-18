@@ -21,118 +21,126 @@ class DatabaseSeeder extends Seeder
         // ]);
         $criterias = [
             [
-                'name' => 'Harga',
+                'name' => 'Jumlah Penghasilan Orang Tua (JPO)',
                 'type' => 'cost',
-                'weight' => 0.3,
+                'weight' => 5,
             ],
             [
-                'name' => 'Kualitas',
+                'name' => 'Jumlah Tanggungan Orang Tua (JTO)',
                 'type' => 'benefit',
-                'weight' => 0.3,
+                'weight' => 3,
             ],
             [
-                'name' => 'Fitur',
-                'type' => 'benefit',
-                'weight' => 0.2,
-            ],
-            [
-                'name' => 'Desain',
-                'type' => 'benefit',
-                'weight' => 0.1,
-            ],
-            [
-                'name' => 'Garansi',
-                'type' => 'benefit',
-                'weight' => 0.05,
-            ],
-            [
-                'name' => 'Biaya perawatan',
+                'name' => 'Jarak Tempat Tinggal (JTT)',
                 'type' => 'cost',
-                'weight' => 0.1,
+                'weight' => 4,
             ],
             [
-                'name' => 'Layanan pelanggan',
+                'name' => 'Nilai rata-rata Ujian Nasional (UN)',
                 'type' => 'benefit',
-                'weight' => 0.05,
+                'weight' => 2,
             ],
             [
-                'name' => 'Reputasi merek',
+                'name' => 'Kesanggupan Tinggal di Asrama (AS)',
                 'type' => 'benefit',
-                'weight' => 0.05,
+                'weight' => 5,
             ],
             [
-                'name' => 'Kemudahan penggunaan',
+                'name' => 'Nilai Rata-rata Raport (NR)',
                 'type' => 'benefit',
-                'weight' => 0.05,
+                'weight' => 2,
             ],
+            [
+                'name' => 'Prestasi Akademik (PA)',
+                'type' => 'benefit',
+                'weight' => 5,
+            ],
+            [
+                'name' => 'Prestasi Non Akademik (PNA)',
+                'type' => 'benefit',
+                'weight' => 5,
+            ],
+            [
+                'name' => 'Keanggotaan Organisasi (KO)',
+                'type' => 'benefit',
+                'weight' => 4,
+            ],
+            [
+                'name' => 'Biaya Hidup (BP)',
+                'type' => 'cost',
+                'weight' => 3,
+            ]
 
         ];
         DB::table('criterias')->insert($criterias);
 
         $alternatives = [
             [
-                'name' => 'Xiaomi Redmi Note 9 Pro',
+                'name' => 'Peter Parker',
             ],
             [
-                'name' => 'Samsung Galaxy A51',
+                'name' => 'Tony Stark',
             ],
             [
-                'name' => 'Realme 6 Pro',
+                'name' => 'Steve Rogers',
             ],
             [
-                'name' => 'Samsung Galaxy A31',
+                'name' => 'Bruce Banner',
             ],
             [
-                'name' => 'Xiaomi Redmi Note 8 Pro',
+                'name' => 'Natasha Romanoff',
             ],
             [
-                'name' => 'iPhone 11 Pro Max',
+                'name' => 'Clint Barton',
             ],
             [
-                'name' => 'Samsung Galaxy S20 Ultra',
+                'name' => 'Thor Odinson',
             ],
             [
-                'name' => 'Google Pixel 4a',
+                'name' => 'Wanda Maximoff',
             ],
             [
-                'name' => 'OnePlus 8 Pro',
+                'name' => 'Vision',
             ],
             [
-                'name' => 'Huawei P40 Pro',
+                'name' => 'Sam Wilson',
             ],
             [
-                'name' => 'Sony Xperia 1 II',
+                'name' => 'James Rhodes',
             ],
             [
-                'name' => 'LG V60 ThinQ',
+                'name' => 'Scott Lang',
             ],
             [
-                'name' => 'Motorola Edge Plus',
+                'name' => "T'Challa",
             ],
             [
-                'name' => 'Nokia 9 PureView',
+                'name' => 'Stephen Strange',
             ],
             [
-                'name' => 'Oppo Find X2 Pro',
+                'name' => 'Carol Danvers',
             ],
             [
-                'name' => 'Vivo X50 Pro',
+                'name' => 'Peter Quill',
             ],
             [
-                'name' => 'Asus ROG Phone 3',
+                'name' => 'Gamora',
             ],
             [
-                'name' => 'Lenovo Legion Phone Duel',
+                'name' => 'Groot',
             ],
             [
-                'name' => 'BlackBerry Key2',
+                'name' => 'Rocket Raccoon',
+            ],
+            [
+                'name' => 'Drax',
             ],
 
         ];
         DB::table('alternatives')->insert($alternatives);
 
-        $criteriasCount = 9;
-        $alternativesCount = 19;
+        $criteriasCount = 10;
+        $alternativesCount = 20;
 
         for ($i = 0; $i < $criteriasCount; $i++) {
             for ($j = 0; $j < $alternativesCount; $j++) {
