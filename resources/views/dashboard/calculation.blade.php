@@ -330,7 +330,7 @@
                 <div
                     class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
                     <div class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                        <h6>Nilai Preverensi (V)</h6>
+                        <h6>Nilai Preferensi (V)</h6>
                     </div>
 
                     <div class="flex-auto px-0 pt-0 pb-2">
@@ -419,14 +419,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($alternatives as $alternative)
+                                    @php
+                                        $rank = 1;
+                                        $sortedAlternatives = $alternatives->sortByDesc(function ($alternative) use ($nilai_preferensi) {
+                                            return $nilai_preferensi[$alternative->id - 1] ?? 0;
+                                        });
+                                    @endphp
+                                    @foreach ($sortedAlternatives as $alternative)
                                         <tr class="{{ $ranking[$alternative->id - 1] == 1 ? ' bg-pink-50' : '' }}">
-                                            <td
-                                                class="px-6 text-start align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <span class="text-sm leading-tight text-slate-400">
-                                                    {{ $alternative->id }}
-                                                </span>
-                                            </td>
                                             <td
                                                 class="px-6 text-start align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                 <span class="text-sm leading-tight text-slate-400">
@@ -437,11 +437,20 @@
                                             <td
                                                 class="p-6 text-start align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                 <span class="text-sm leading-tight text-slate-400">
-                                                    {{ $ranking[$alternative->id - 1] ?? '-' }}
+                                                    {{ $nilai_preferensi[$alternative->id - 1] ?? '-' }}
                                                 </span>
                                             </td>
 
+                                            <td
+                                                class="p-6 text-start align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                <span class="text-sm leading-tight text-slate-400">
+                                                    {{ $rank }}
+                                                </span>
+                                            </td>
                                         </tr>
+                                        @php
+                                            $rank++;
+                                        @endphp
                                     @endforeach
                                 </tbody>
                             </table>

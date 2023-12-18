@@ -81,24 +81,22 @@ class TopsisController extends Controller
                 for ($k = 0; $k < count($matrik_keputusan[$i]); $k++) {
                     $jumlah_kuadrat += pow($matrik_keputusan[$i][$k], 2);
                 }
-                $matrik_normalisasi[$i][$j] = round($matrik_keputusan[$i][$j] / sqrt($jumlah_kuadrat), 3);
+                $matrik_normalisasi[$i][$j] = number_format($matrik_keputusan[$i][$j] / sqrt($jumlah_kuadrat), 3);
             }
         }
         return $matrik_normalisasi;
     }
 
-    private function buatMatriksNormalisasiTerbobot($matrik_normalisasi, $criterias)
+    private function buatMatriksNormalisasiTerbobot($matrik_normalisasi, $alternatives)
     {
         $matrik_normalisasi_terbobot = [];
-        for ($i = 0; $i < count($criterias); $i++) {
-            $matrik_normalisasi_terbobot[$i] = [];
-            for ($j = 0; $j < count($matrik_normalisasi[$i]); $j++) {
-                $matrik_normalisasi_terbobot[$i][$j] = $matrik_normalisasi[$i][$j] * $criterias[$i]->weight;
+        for ($i = 0; $i < count($alternatives); $i++) {
+            for ($j = 0; $j < count($matrik_normalisasi[0]); $j++) {
+                $matrik_normalisasi_terbobot[$i][$j] = number_format(($matrik_normalisasi[$i][$j] * $alternatives[$i]->weight), 3, '.', '');
             }
         }
         return $matrik_normalisasi_terbobot;
-
-    }
+    }   
 
     private function hitungSolusiIdealPositif($matrik_normalisasi_terbobot)
     {
@@ -109,9 +107,9 @@ class TopsisController extends Controller
             for ($j = 0; $j < count($matrik_normalisasi_terbobot[$i]); $j++) {
                 $max = max($matrik_normalisasi_terbobot[$i]);
                 $min = min($matrik_normalisasi_terbobot[$i]);
-                if ($type[$i] == 'benefit') {
+                if ($type[$i] == 'Benefit' || $type[$i] == 'benefit') {
                     $solusi_ideal_positif[$i] = $max;
-                } else {
+                } else if ($type[$i] == 'Cost' || $type[$i] == 'cost'){
                     $solusi_ideal_positif[$i] = $min;
                 }
 
@@ -128,9 +126,9 @@ class TopsisController extends Controller
             for ($j = 0; $j < count($matrik_normalisasi_terbobot[$i]); $j++) {
                 $max = max($matrik_normalisasi_terbobot[$i]);
                 $min = min($matrik_normalisasi_terbobot[$i]);
-                if ($type[$i] == 'benefit') {
+                if ($type[$i] == 'Benefit' || $type[$i] == 'benefit') {
                     $solusi_ideal_negatif[$i] = $min;
-                } else {
+                } else if ($type[$i] == 'Cost' || $type[$i] == 'cost'){
                     $solusi_ideal_negatif[$i] = $max;
                 }
 
@@ -141,29 +139,29 @@ class TopsisController extends Controller
 
     private function hitungJarakSolusiIdealPositif($matrik_normalisasi_terbobot, $solusi_ideal_positif)
     {
-        $jarak_solusi_ideal_negatif = [];
+        $jarak_solusi_ideal_positif = [];
         for ($i = 0; $i < count($matrik_normalisasi_terbobot[0]); $i++) {
             $jarak = 0;
 
             for ($j = 0; $j < count($matrik_normalisasi_terbobot); $j++) {
                 $jarak += pow(($solusi_ideal_positif[$j] - $matrik_normalisasi_terbobot[$j][$i]), 2);
             }
-            $jarak_solusi_ideal_negatif[$i] = round(sqrt($jarak), 3);
+            $jarak_solusi_ideal_positif[$i] = number_format(sqrt($jarak), 3);
 
         }
-        return $jarak_solusi_ideal_negatif;
+        return $jarak_solusi_ideal_positif;
     }
 
-    private function hitungJarakSolusiIdealNegatif($matrik_normalisasi_terbobot, $solusi_ideal_negatif)
+        private function hitungJarakSolusiIdealNegatif($matrik_normalisasi_terbobot, $solusi_ideal_negatif)
     {
         $jarak_solusi_ideal_negatif = [];
         for ($i = 0; $i < count($matrik_normalisasi_terbobot[0]); $i++) {
             $jarak = 0;
 
             for ($j = 0; $j < count($matrik_normalisasi_terbobot); $j++) {
-                $jarak += pow(($solusi_ideal_negatif[$j] - $matrik_normalisasi_terbobot[$j][$i]), 2);
+                $jarak += pow(($matrik_normalisasi_terbobot[$j][$i] - $solusi_ideal_negatif[$j] ), 2);
             }
-            $jarak_solusi_ideal_negatif[$i] = round(sqrt($jarak), 3);
+            $jarak_solusi_ideal_negatif[$i] = number_format(sqrt($jarak), 3);
 
         }
         return $jarak_solusi_ideal_negatif;
@@ -173,14 +171,13 @@ class TopsisController extends Controller
     {
         $nilai_preferensi = [];
         for ($i = 0; $i < count($jarak_solusi_ideal_positif); $i++) {
-            $nilai_preferensi[$i] = round($jarak_solusi_ideal_negatif[$i] / ($jarak_solusi_ideal_positif[$i] + $jarak_solusi_ideal_negatif[$i]), 3);
+            $nilai_preferensi[$i] = number_format($jarak_solusi_ideal_negatif[$i] / ($jarak_solusi_ideal_positif[$i] + $jarak_solusi_ideal_negatif[$i]), 3);
         }
         return $nilai_preferensi;
     }
 
     private function hitungRanking($nilai_preferensi)
     {
-
         // Sort rankings in descending order
         arsort($nilai_preferensi);
 
