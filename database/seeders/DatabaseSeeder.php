@@ -139,16 +139,35 @@ class DatabaseSeeder extends Seeder
         ];
         DB::table('alternatives')->insert($alternatives);
 
-        $criteriasCount = 10;
-        $alternativesCount = 20;
+        $values = [
+            [5, 2, 1, 4, 1, 2, 4, 1, 5, 5],
+            [5, 1, 1, 3, 1, 6, 6, 2, 6, 1],
+            [5, 3, 1, 4, 1, 5, 5, 1, 7, 2],
+            [2, 7, 3, 2, 8, 4, 2, 3, 8, 3],
+            [3, 4, 4, 2, 3, 2, 1, 3, 4, 4],
+            [5, 5, 6, 2, 3, 7, 1, 2, 5, 2],
+            [6, 3, 7, 5, 4, 5, 2, 4, 5, 3],
+            [4, 1, 3, 6, 2, 4, 2, 5, 5, 3],
+            [7, 2, 3, 8, 1, 4, 3, 6, 6, 2],
+            [8, 8, 6, 4, 2, 4, 3, 4, 4, 2],
+            [3, 7, 7, 5, 5, 3, 4, 3, 7, 1],
+            [2, 6, 9, 1, 6, 2, 4, 8, 8, 1],
+            [9, 5, 2, 2, 7, 1, 6, 6, 8, 4],
+            [4, 3, 1, 1, 4, 5, 5, 4, 4, 5],
+            [3, 9, 2, 1, 8, 4, 7, 3, 3, 4],
+            [2, 3, 2, 5, 5, 5, 9, 3, 2, 5],
+            [1, 5, 4, 3, 3, 5, 8, 3, 1, 6],
+            [8, 7, 3, 7, 2, 7, 1, 2, 5, 6],
+            [3, 6, 4, 5, 2, 6, 2, 5, 6, 3],
+            [5, 2, 5, 3, 1, 5, 3, 5, 7, 1],
+        ];
 
-        for ($i = 0; $i < $criteriasCount; $i++) {
-            for ($j = 0; $j < $alternativesCount; $j++) {
-                $value = rand(50, 99); // Assign value randomly
+        foreach ($values as $i => $row) {
+            foreach ($row as $j => $score) {
                 DB::table('values')->insert([
-                    'criteria_id' => $i + 1,
-                    'alternative_id' => $j + 1,
-                    'score' => $value
+                    'alternative_id' => $i + 1,
+                    'criteria_id' => $j + 1,
+                    'score' => $score,
                 ]);
             }
         }
