@@ -12,7 +12,7 @@
                             <div class="flex-none w-2/3 max-w-full px-3">
                                 <div>
                                     <p class="mb-0 font-sans font-semibold leading-normal text-sm">
-                                        Sistem Pendukung Keputusan dengan:
+                                        Metode yang digunakan:
                                     </p>
                                     <h5 class="mb-0 font-bold">
                                         Metode TOPSIS
@@ -105,9 +105,9 @@
                         <div class="flex flex-wrap -mx-3">
                             <div class="max-w-full px-3 lg:w-1/2 lg:flex-none">
                                 <div class="flex flex-col h-full">
-                                    <p class="pt-2 mb-1 font-semibold">Penjelasan Metode</p>
-                                    <h5 class="font-bold">Metode TOPSIS</h5>
-                                    <p class="mb-12">
+                                    <p class="pt-2 font-semibold">Penjelasan Metode</p>
+                                    <h5 class="font-bold my-2" style="font-size: 18pt">Metode TOPSIS</h5>
+                                    <p class="mb-4" style="font-size: 10pt">
                                         Metode SPK TOPSIS (Technique for Order Preference by Similarity to Ideal Solution)
                                         adalah suatu teknik yang digunakan dalam pengambilan keputusan multi-kriteria untuk
                                         memilih alternatif terbaik dari sejumlah pilihan yang tersedia. Langkah-langkah
@@ -124,7 +124,7 @@
                                         lebih terukur dan sistematis dalam situasi di mana ada banyak pilihan dan kriteria
                                         yang perlu dipertimbangkan.
                                     </p>
-                                    <a class="mt-auto mb-0 font-semibold leading-normal text-sm group text-slate-500"
+                                    <a class="mt-auto mb-0 font-bold leading-normal text-sm group text-slate-500"
                                         href="https://robertsoczewica.medium.com/what-is-topsis-b05c50b3cd05" target="_blank">
                                         Read More
                                         <i
