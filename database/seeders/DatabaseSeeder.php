@@ -68,91 +68,52 @@ class DatabaseSeeder extends Seeder
         DB::table('criterias')->insert($criterias);
 
         $alternatives = [
-            [
-                'name' => 'Siswa 1',
-            ],
-            [
-                'name' => 'Siswa 2',
-            ],
-            [
-                'name' => 'Siswa 3',
-            ],
-            [
-                'name' => 'Siswa 4',
-            ],
-            [
-                'name' => 'Siswa 5',
-            ],
-            [
-                'name' => 'Siswa 6',
-            ],
-            [
-                'name' => 'Siswa 7',
-            ],
-            [
-                'name' => 'Siswa 8',
-            ],
-            [
-                'name' => 'Siswa 9',
-            ],
-            [
-                'name' => 'Siswa 10',
-            ],
-            [
-                'name' => 'Siswa 11',
-            ],
-            [
-                'name' => 'Siswa 12',
-            ],
-            [
-                'name' => 'Siswa 13',
-            ],
-            [
-                'name' => 'Siswa 14',
-            ],
-            [
-                'name' => 'Siswa 15',
-            ],
-            [
-                'name' => 'Siswa 16',
-            ],
-            [
-                'name' => 'Siswa 17',
-            ],
-            [
-                'name' => 'Siswa 18',
-            ],
-            [
-                'name' => 'Siswa 19',
-            ],
-            [
-                'name' => 'Siswa 20',
-            ],
+            ['name' => 'Andika Pratama'],
+            ['name' => 'Dian Saraswati'],
+            ['name' => 'Rizky Akbar'],
+            ['name' => 'Siti Nurul Hidayah'],
+            ['name' => 'Fajar Nugraha'],
+            ['name' => 'Aulia Fitriani'],
+            ['name' => 'Irfan Kurniawan'],
+            ['name' => 'Anisa Putri'],
+            ['name' => 'Aditya Wijaya'],
+            ['name' => 'Laras Ayu'],
+            ['name' => 'Agung Purnama'],
+            ['name' => 'Tiara Maulida'],
+            ['name' => 'Bayu Prabowo'],
+            ['name' => 'Dewi Lestari'],
+            ['name' => 'Yoga Saputra'],
+            ['name' => 'Nita Permata'],
+            ['name' => 'Rizki Ramadhan'],
+            ['name' => 'Nurul Fadillah'],
+            ['name' => 'Faisal Rahman'],
+            ['name' => 'Nadya Utami'],
         ];
+        
 
         DB::table('alternatives')->insert($alternatives);
 
         $values = [
-            [5, 2, 1, 4, 1, 2, 4, 1, 5, 5],
-            [5, 1, 1, 3, 1, 6, 6, 2, 6, 1],
-            [5, 3, 1, 4, 1, 5, 5, 1, 7, 2],
-            [2, 7, 3, 2, 8, 4, 2, 3, 8, 3],
-            [3, 4, 4, 2, 3, 2, 1, 3, 4, 4],
-            [5, 5, 6, 2, 3, 7, 1, 2, 5, 2],
-            [6, 3, 7, 5, 4, 5, 2, 4, 5, 3],
-            [4, 1, 3, 6, 2, 4, 2, 5, 5, 3],
-            [7, 2, 3, 8, 1, 4, 3, 6, 6, 2],
-            [8, 8, 6, 4, 2, 4, 3, 4, 4, 2],
-            [3, 7, 7, 5, 5, 3, 4, 3, 7, 1],
-            [2, 6, 9, 1, 6, 2, 4, 8, 8, 1],
-            [9, 5, 2, 2, 7, 1, 6, 6, 8, 4],
-            [4, 3, 1, 1, 4, 5, 5, 4, 4, 5],
-            [3, 9, 2, 1, 8, 4, 7, 3, 3, 4],
-            [2, 3, 2, 5, 5, 5, 9, 3, 2, 5],
-            [1, 5, 4, 3, 3, 5, 8, 3, 1, 6],
-            [8, 7, 3, 7, 2, 7, 1, 2, 5, 6],
-            [3, 6, 4, 5, 2, 6, 2, 5, 6, 3],
-            [5, 2, 5, 3, 1, 5, 3, 5, 7, 1],
+            [5, 2, 1, 4, 1, 2, 3, 1, 3, 5],
+            [5, 1, 1, 3, 1, 3, 3, 2, 1, 1],
+            [5, 3, 1, 4, 1, 5, 2, 1, 3, 2],
+            [2, 1, 3, 2, 2, 4, 2, 3, 3, 3],
+            [3, 4, 4, 2, 3, 2, 1, 3, 1, 4],
+            [5, 5, 5, 2, 3, 4, 1, 2, 3, 2],
+            [1, 3, 2, 5, 2, 5, 2, 3, 1, 3],
+            [1, 1, 3, 1, 2, 4, 2, 2, 3, 3],
+            [2, 2, 3, 3, 1, 4, 3, 1, 3, 2],
+            [3, 5, 2, 4, 2, 4, 3, 3, 3, 2],
+            [3, 4, 2, 5, 3, 3, 2, 3, 1, 1],
+            [2, 2, 5, 1, 3, 2, 3, 1, 3, 1],
+            [1, 5, 2, 2, 2, 1, 1, 3, 1, 4],
+            [4, 3, 1, 1, 3, 5, 3, 2, 1, 5],
+            [3, 4, 2, 1, 2, 4, 2, 3, 1, 4],
+            [2, 3, 2, 5, 1, 5, 1, 3, 3, 5],
+            [1, 1, 4, 3, 3, 5, 3, 3, 1, 2],
+            [4, 3, 3, 4, 2, 3, 1, 2, 3, 3],
+            [3, 4, 4, 5, 2, 3, 2, 1, 3, 3],
+            [5, 2, 5, 3, 1, 5, 3, 3, 1, 1],
         ];
 
         foreach ($values as $i => $row) {
