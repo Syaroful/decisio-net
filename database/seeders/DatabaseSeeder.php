@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Nilai Rata-rata Rapor (NR)',
                 'type' => 'Benefit',
-                'weight' => 2,
+                'weight' => 4,
             ],
             [
                 'name' => 'Prestasi Akademis (PA)',
@@ -65,6 +65,7 @@ class DatabaseSeeder extends Seeder
                 'weight' => 3,
             ],
         ];
+
         DB::table('criterias')->insert($criterias);
 
         $alternatives = [

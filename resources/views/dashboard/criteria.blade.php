@@ -60,12 +60,16 @@
                                                     {{ $criterion->weight }}
                                                 </span>
                                             </td>
-                                            <td
-                                                class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <span
-                                                    class="{{ $criterion->type === 'cost' ? 'bg-gradient-to-tl from-red-600 to-orange-400' : 'bg-gradient-to-tl from-green-600 to-lime-400' }} px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">
-                                                    {{ $criterion->type }}
-                                                </span>
+                                            <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                @if ($criterion->type === 'cost')
+                                                    <span class="bg-gradient-to-tl from-red-600 to-orange-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">
+                                                        {{ $criterion->type }}
+                                                    </span>
+                                                @else
+                                                    <span class="bg-gradient-to-tl from-green-600 to-lime-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">
+                                                        {{ $criterion->type }}
+                                                    </span>
+                                                @endif
                                             </td>
                                             <td
                                                 class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
